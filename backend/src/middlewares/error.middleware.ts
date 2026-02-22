@@ -14,21 +14,17 @@ export const errorMiddleware = (
   _next: NextFunction
 ): void => {
   if (err instanceof AppError) {
-    res.status(err.statusCode).json({
-      success: false,
-      message: err.message,
-    });
+    res.fail(err.message, err.statusCode);
     return;
   }
 
   // Unknown / programming error
   console.error("Unhandled error:", err);
 
-  res.status(500).json({
-    success: false,
-    message:
-      env.NODE_ENV === "production"
-        ? "Internal server error"
-        : err.message || "Internal server error",
-  });
+  const message =
+    env.NODE_ENV === "production"
+      ? "Internal server error"
+      : err.message || "Internal server error";
+
+  res.fail(message, 500);
 };

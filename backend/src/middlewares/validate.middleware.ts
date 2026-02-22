@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ZodSchema, ZodError } from "zod";
+import { ZodType, ZodError } from "zod";
 import { AppError } from "../utils/AppError";
 
 /**
@@ -7,7 +7,7 @@ import { AppError } from "../utils/AppError";
  * against the given Zod schema. Strips unknown keys (`.strict()` optional).
  */
 export const validate =
-  (schema: ZodSchema) =>
+  (schema: ZodType) =>
   (req: Request, _res: Response, next: NextFunction): void => {
     try {
       req.body = schema.parse(req.body);
