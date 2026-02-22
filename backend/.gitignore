@@ -1,0 +1,15 @@
+node_modules/
+dist/
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Generated migration snapshots (keep .sql files, ignore meta)
+# Uncomment below if you prefer to ignore all migrations from git:
+# src/db/migrations/
